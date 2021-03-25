@@ -221,6 +221,7 @@
     <Content Include="Areas\Admin\Views\ToursManagement\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\ToursManagement\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ToursManagement\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_slidebar.cshtml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />

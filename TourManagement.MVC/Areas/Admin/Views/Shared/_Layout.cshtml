@@ -42,8 +42,15 @@
         </div>
     </nav>
 
-    <div class="container body-content">
-        @RenderBody()
+    <div class="container-fluid p-0">
+        <div class="d-flex">
+            <div class="left-menu ml-0">
+                @Html.Partial("_slideBar")
+            </div>
+            <div class="main-content px-5">
+                @RenderBody()
+            </div>
+        </div>
         <hr />
         <div class="card-footer text-muted text-center">
             <p>@DateTime.Now.Year - MeowMeow &copy;</p>
