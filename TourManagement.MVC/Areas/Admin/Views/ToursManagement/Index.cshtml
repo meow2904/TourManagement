@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TourManagement.Core.DbContext.Tour>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="pt-3">
+    <h2>Tours Management</h2>
+    <hr />
+</div>
+<div class="py-2">
+    <a href="@Url.Action("Create", "ToursManagement")" class="btn btn-primary">ADD</a>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Transport.Name)
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>               
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Transport.Name)
+            </td>
+            <td class="d-flex border-bottom-0 border-left-0 border-right-0">
+                <a href="@Url.Action("Edit", "ToursManagement", new { id=item.TourID })" class="btn btn-outline-primary mx-1">Edit</a>
+                <a href="@Url.Action("Delete", "ToursManagement", new { id=item.TourID })" class="btn btn-outline-danger mx-1">Delete</a>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.TourID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TourID })*@
+            </td>
+        </tr>
+    }
+
+</table>

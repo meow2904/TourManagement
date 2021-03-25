@@ -1,0 +1,68 @@
+﻿@model IEnumerable<TourManagement.Core.DbContext.Hotel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="pt-3">
+    <h2>Hotels Management</h2>
+    <hr />
+</div>
+<div class="py-2">
+    <a href="@Url.Action("Create", "HotelsManagement")" class="btn btn-primary">ADD</a>
+</div>
+
+<table class="table table-bordered ">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td class="d-flex border-bottom-0 border-left-0 border-right-0">
+            <a href="@Url.Action("Edit", "HotelsManagement", new { id=item.HotelID })" class="btn btn-outline-primary mx-1">Edit</a>
+            <a href="@Url.Action("Delete", "HotelsManagement", new { id=item.HotelID })" class="btn btn-outline-danger mx-1">Delete</a>
+        </td>
+    </tr>
+}
+
+</table>

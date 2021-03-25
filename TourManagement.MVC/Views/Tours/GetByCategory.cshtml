@@ -1,0 +1,13 @@
+﻿@model IEnumerable<TourManagement.Core.DbContext.Tour>
+
+@{
+    ViewBag.Title = "List Tour";
+}
+<h1>Danh sách tour</h1>
+<hr />
+<div class="row">
+    @foreach (var item in Model)
+    {
+        @Html.Partial("_TourOverView", item);
+    }
+</div>

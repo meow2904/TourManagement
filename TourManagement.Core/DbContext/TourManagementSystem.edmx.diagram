@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1de35e8cdc98430d87ff4ae6f19cac02" Name="Diagram1">
+        <EntityTypeShape EntityType="DuLichTourModel.Account" Width="1.5" PointX="0.75" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichTourModel.Category" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichTourModel.Customer" Width="1.5" PointX="3" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichTourModel.Destination" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichTourModel.Employee" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichTourModel.Group" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichTourModel.Hotel" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichTourModel.Order" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichTourModel.OrderDetail" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichTourModel.sysdiagram" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichTourModel.Tour" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichTourModel.Transport" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <AssociationConnector Association="DuLichTourModel.FK_Customer_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLichTourModel.FK_Group_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLichTourModel.FK_Order_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLichTourModel.FK_Tour_Destination" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLichTourModel.FK_Tour_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLichTourModel.FK_Tour_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLichTourModel.FK_Tour_Hotel" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLichTourModel.FK_OrderDetail_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLichTourModel.FK_OrderDetail_Tour1" ManuallyRouted="false" />
+        <AssociationConnector Association="DuLichTourModel.FK_Tour_Transport" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

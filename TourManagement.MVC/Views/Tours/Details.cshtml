@@ -1,0 +1,50 @@
+﻿@model TourManagement.Core.DbContext.Tour
+@{
+    ViewBag.Title = Model.Name;
+}
+<div class="container tour-container pt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="h5roduct-image">
+                <img class="img-fluid img-thumbnail" src="~/Content/images/@Model.Image"
+                     alt="@Model.Name" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="tour-cart">
+                <div>
+                    <h3>@Model.Name</h3>
+                </div>
+                <div>
+                    <h5>Thời gian: <span class="font-weight-light">@Model.Time</span></h5>
+                    <hr />
+                    <h5>Băt đầu: <span class="font-weight-light">@Model.TimeStart.Date</span></h5>
+                    <hr />
+                    <h5>Điểm khởi hành: <span class="font-weight-light">@Model.Transport.Name</span></h5>
+                    <hr />
+                    <h5>Điểm xuất phát: <span class="font-weight-light">@Model.PositionStart</span></h5>
+                    <hr />
+                    <h5>Giá từ: <span class="font-weight-light">@Model.Price đ</span></h5>
+                    <hr />
+
+                </div>
+                <div class="input-group addtocart">
+                    <a href="#" class="addtocart btn btn-outline-primary mr-3"><span class="fas fa-shopping-cart mr-1"></span>Order Tour</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h2>Information detail</h2>
+            <hr />
+            <div class="col-lg-12">
+                <h6>Thời gian: @Model.Time</h6>
+                <h6>Thời gian khởi hành: @Model.TimeStart.Date</h6>
+                <h6>Vận chuyển: @Model.Transport.Name</h6>
+                <h6>Xuất phát: @Model.PositionStart</h6>
+                <h6>Điểm đến: @Model.Destination.Name</h6>
+                <h6>Nội dung:</h6>
+                <p>@Model.Content</p>
+            </div>
+        </div>
+    </div>
+</div>

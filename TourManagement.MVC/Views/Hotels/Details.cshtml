@@ -1,0 +1,43 @@
+﻿@model TourManagement.Core.DbContext.Hotel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container tour-container pt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="h5roduct-image">
+                <img class="img-fluid img-thumbnail" src="~/Content/images/hotels/@Model.Image"
+                     alt="@Model.Name" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="tour-cart">
+                <div>
+                    <h3>@Model.Name</h3>
+                </div>
+                <div>
+                    <h5>Điện thoại: <span class="font-weight-light">@Model.Phone</span></h5>
+                    <hr />
+                    <h5>Email: <span class="font-weight-light">@Model.Email</span></h5>
+                    <hr />
+                    <h5>Địa chỉ: <span class="font-weight-light">@Model.Address</span></h5>
+                    <hr />
+                    <h5>Giá từ: <span class="font-weight-light">@Model.Price đ</span></h5>
+                    <hr />
+
+                </div>
+                <div class="input-group addtocart">
+                    <a href="#" class="addtocart btn btn-outline-primary mr-3"><span class="fas fa-shopping-cart mr-1"></span>Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h6>Nội dung:</h6>
+                <p>@Model.Content</p>
+            </div>
+        </div>
+    </div>
+</div>
