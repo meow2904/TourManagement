@@ -52,6 +52,7 @@
           <Property Name="Phone" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Email" Type="nchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="StatusWorking" Type="bit" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -109,24 +110,16 @@
           <Property Name="TourID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Time" Type="int" Nullable="false" />
-          <Property Name="TimeStart" Type="datetime" Nullable="false" />
+          <Property Name="TimeStart" Type="date" Nullable="false" />
           <Property Name="PositionStart" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Transport" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="HotelID" Type="int" />
-          <Property Name="TransportID" Type="int" Nullable="false" />
           <Property Name="GroupID" Type="int" Nullable="false" />
           <Property Name="EmployeeID" Type="int" Nullable="false" />
           <Property Name="DestinationID" Type="int" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Image" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="Transport">
-          <Key>
-            <PropertyRef Name="TransportID" />
-          </Key>
-          <Property Name="TransportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Brand" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK_Customer_Account">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
@@ -236,18 +229,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tour_Transport">
-          <End Role="Transport" Type="Self.Transport" Multiplicity="1" />
-          <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Transport">
-              <PropertyRef Name="TransportID" />
-            </Principal>
-            <Dependent Role="Tour">
-              <PropertyRef Name="TransportID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DuLichTourModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -260,7 +241,6 @@
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tour" EntityType="Self.Tour" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Transport" EntityType="Self.Transport" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Customer_Account" Association="Self.FK_Customer_Account">
             <End Role="Account" EntitySet="Account" />
             <End Role="Customer" EntitySet="Customer" />
@@ -295,10 +275,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Tour_Hotel" Association="Self.FK_Tour_Hotel">
             <End Role="Hotel" EntitySet="Hotel" />
-            <End Role="Tour" EntitySet="Tour" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tour_Transport" Association="Self.FK_Tour_Transport">
-            <End Role="Transport" EntitySet="Transport" />
             <End Role="Tour" EntitySet="Tour" />
           </AssociationSet>
         </EntityContainer>
@@ -359,6 +335,7 @@
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StatusWorking" Type="Boolean" />
           <NavigationProperty Name="Tours" Relationship="Self.FK_Tour_Employee" FromRole="Employee" ToRole="Tour" />
         </EntityType>
         <EntityType Name="Group">
@@ -424,11 +401,11 @@
           <Property Name="TourID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Time" Type="Int32" Nullable="false" />
-          <Property Name="TimeStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TimeStart" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PositionStart" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Transport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="HotelID" Type="Int32" />
-          <Property Name="TransportID" Type="Int32" Nullable="false" />
           <Property Name="GroupID" Type="Int32" Nullable="false" />
           <Property Name="EmployeeID" Type="Int32" Nullable="false" />
           <Property Name="DestinationID" Type="Int32" Nullable="false" />
@@ -439,16 +416,6 @@
           <NavigationProperty Name="Group" Relationship="Self.FK_Tour_Group" FromRole="Tour" ToRole="Group" />
           <NavigationProperty Name="Hotel" Relationship="Self.FK_Tour_Hotel" FromRole="Tour" ToRole="Hotel" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Tour1" FromRole="Tour" ToRole="OrderDetail" />
-          <NavigationProperty Name="Transport" Relationship="Self.FK_Tour_Transport" FromRole="Tour" ToRole="Transport" />
-        </EntityType>
-        <EntityType Name="Transport">
-          <Key>
-            <PropertyRef Name="TransportID" />
-          </Key>
-          <Property Name="TransportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Brand" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Tours" Relationship="Self.FK_Tour_Transport" FromRole="Transport" ToRole="Tour" />
         </EntityType>
         <Association Name="FK_Customer_Account">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
@@ -558,18 +525,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tour_Transport">
-          <End Role="Transport" Type="Self.Transport" Multiplicity="1" />
-          <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Transport">
-              <PropertyRef Name="TransportID" />
-            </Principal>
-            <Dependent Role="Tour">
-              <PropertyRef Name="TransportID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DuLichTourContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -582,7 +537,6 @@
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tours" EntityType="Self.Tour" />
-          <EntitySet Name="Transports" EntityType="Self.Transport" />
           <AssociationSet Name="FK_Customer_Account" Association="Self.FK_Customer_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Customer" EntitySet="Customers" />
@@ -618,10 +572,6 @@
           <AssociationSet Name="FK_OrderDetail_Tour1" Association="Self.FK_OrderDetail_Tour1">
             <End Role="Tour" EntitySet="Tours" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tour_Transport" Association="Self.FK_Tour_Transport">
-            <End Role="Transport" EntitySet="Transports" />
-            <End Role="Tour" EntitySet="Tours" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -680,6 +630,7 @@
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="StatusWorking" ColumnName="StatusWorking" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -744,23 +695,14 @@
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
                 <ScalarProperty Name="PositionStart" ColumnName="PositionStart" />
+                <ScalarProperty Name="Transport" ColumnName="Transport" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="HotelID" ColumnName="HotelID" />
-                <ScalarProperty Name="TransportID" ColumnName="TransportID" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="DestinationID" ColumnName="DestinationID" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Transports">
-            <EntityTypeMapping TypeName="DuLichTourModel.Transport">
-              <MappingFragment StoreEntitySet="Transport">
-                <ScalarProperty Name="TransportID" ColumnName="TransportID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Brand" ColumnName="Brand" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

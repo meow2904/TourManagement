@@ -25,9 +25,9 @@ namespace TourManagement.Core.DbContext
         public int Time { get; set; }
         public System.DateTime TimeStart { get; set; }
         public string PositionStart { get; set; }
+        public string Transport { get; set; }
         public string Content { get; set; }
         public Nullable<int> HotelID { get; set; }
-        public int TransportID { get; set; }
         public int GroupID { get; set; }
         public int EmployeeID { get; set; }
         public int DestinationID { get; set; }
@@ -40,6 +40,5 @@ namespace TourManagement.Core.DbContext
         public virtual Hotel Hotel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual Transport Transport { get; set; }
     }
 }

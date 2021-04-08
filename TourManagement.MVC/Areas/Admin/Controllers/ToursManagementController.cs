@@ -1,24 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using TourManagement.Core.DbContext;
+using TourManagement.Core.Repository;
 
 namespace TourManagement.MVC.Areas.Admin.Controllers
 {
     public class ToursManagementController : Controller
     {
         private DuLichTourContext db = new DuLichTourContext();
+        private readonly ITourRepository _tourRepository;
+        private readonly IEmployeeRepository _employeeRepository;
+        
+        public ToursManagementController(ITourRepository tourRepository, IEmployeeRepository employeeRepository)
+        {
+            _tourRepository = tourRepository;
+            _employeeRepository = employeeRepository;
+        }
 
         // GET: Admin/ToursManagement
         public ActionResult Index()
         {
-            var tours = db.Tours.Include(t => t.Destination).Include(t => t.Employee).Include(t => t.Group).Include(t => t.Hotel).Include(t => t.Transport);
-            return View(tours.ToList());
+            var tours = _tourRepository.GetAll();
+            return View(tours);
         }
 
         // GET: Admin/ToursManagement/Details/5
@@ -28,12 +36,31 @@ namespace TourManagement.MVC.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tour tour = db.Tours.Find(id);
+            db.Configuration.ProxyCreationEnabled = false;
+
+            var tour = db.Tours.First(x => x.TourID== id);
+            var json = new JavaScriptSerializer().Serialize(tour);
             if (tour == null)
             {
                 return HttpNotFound();
             }
-            return View(tour);
+            //return Json(tour,"lan" , JsonRequestBehavior.AllowGet);
+            return Content(json);
+        }
+        
+        //Get: Admin/ToursManagement/GetEmployee
+        [HttpPost]
+        public ActionResult GetEmployee(DateTime datePick, int time)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var employees = _employeeRepository.GetEmployeeFree(datePick, time);
+            //var json = new JavaScriptSerializer().Serialize(employees.ToList());
+            string empNull = "";
+            foreach(var item in employees)
+            {
+                empNull += item.Name+",";
+            }
+            return Content(empNull);
         }
 
         // GET: Admin/ToursManagement/Create
@@ -43,7 +70,6 @@ namespace TourManagement.MVC.Areas.Admin.Controllers
             ViewBag.EmployeeID = new SelectList(db.Employees, "EmployeeID", "Name");
             ViewBag.GroupID = new SelectList(db.Groups, "GroupID", "Name");
             ViewBag.HotelID = new SelectList(db.Hotels, "HotelID", "Name");
-            ViewBag.TransportID = new SelectList(db.Transports, "TransportID", "Name");
             return View();
         }
 
@@ -65,7 +91,7 @@ namespace TourManagement.MVC.Areas.Admin.Controllers
             ViewBag.EmployeeID = new SelectList(db.Employees, "EmployeeID", "Name", tour.EmployeeID);
             ViewBag.GroupID = new SelectList(db.Groups, "GroupID", "Name", tour.GroupID);
             ViewBag.HotelID = new SelectList(db.Hotels, "HotelID", "Name", tour.HotelID);
-            ViewBag.TransportID = new SelectList(db.Transports, "TransportID", "Name", tour.TransportID);
+            //ViewBag.TransportID = new SelectList(db.Transports, "TransportID", "Name", tour.TransportID);
             return View(tour);
         }
 
@@ -85,7 +111,7 @@ namespace TourManagement.MVC.Areas.Admin.Controllers
             ViewBag.EmployeeID = new SelectList(db.Employees, "EmployeeID", "Name", tour.EmployeeID);
             ViewBag.GroupID = new SelectList(db.Groups, "GroupID", "Name", tour.GroupID);
             ViewBag.HotelID = new SelectList(db.Hotels, "HotelID", "Name", tour.HotelID);
-            ViewBag.TransportID = new SelectList(db.Transports, "TransportID", "Name", tour.TransportID);
+            //ViewBag.TransportID = new SelectList(db.Transports, "TransportID", "Name", tour.TransportID);
             return View(tour);
         }
 
@@ -106,7 +132,7 @@ namespace TourManagement.MVC.Areas.Admin.Controllers
             ViewBag.EmployeeID = new SelectList(db.Employees, "EmployeeID", "Name", tour.EmployeeID);
             ViewBag.GroupID = new SelectList(db.Groups, "GroupID", "Name", tour.GroupID);
             ViewBag.HotelID = new SelectList(db.Hotels, "HotelID", "Name", tour.HotelID);
-            ViewBag.TransportID = new SelectList(db.Transports, "TransportID", "Name", tour.TransportID);
+            //ViewBag.TransportID = new SelectList(db.Transports, "TransportID", "Name", tour.TransportID);
             return View(tour);
         }
 

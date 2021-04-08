@@ -36,6 +36,5 @@ namespace TourManagement.Core.DbContext
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tour> Tours { get; set; }
-        public virtual DbSet<Transport> Transports { get; set; }
     }
 }

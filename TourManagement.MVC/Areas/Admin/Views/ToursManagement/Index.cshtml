@@ -28,9 +28,6 @@
             @Html.DisplayNameFor(model => model.Image)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Transport.Name)
-        </th>
-        <th>
             Action
         </th>
     </tr>
@@ -45,19 +42,14 @@
                 @Html.DisplayFor(modelItem => item.Time)
             </td>               
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Price) đ
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Transport.Name)
-            </td>
+                <img style="max-width:150px;" src="~/Content/images/@item.Image" alt="@item.Name" />
+            </td>     
             <td class="d-flex border-bottom-0 border-left-0 border-right-0">
                 <a href="@Url.Action("Edit", "ToursManagement", new { id=item.TourID })" class="btn btn-outline-primary mx-1">Edit</a>
                 <a href="@Url.Action("Delete", "ToursManagement", new { id=item.TourID })" class="btn btn-outline-danger mx-1">Delete</a>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.TourID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.TourID })*@
             </td>
         </tr>
     }

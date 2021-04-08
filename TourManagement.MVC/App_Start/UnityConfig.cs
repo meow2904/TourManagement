@@ -44,6 +44,8 @@ namespace TourManagement.MVC
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<ITourRepository, TourRepository>();
             container.RegisterType<IHotelRepository, HotelRepository>();
+            container.RegisterType<IEmployeeRepository, EmployeeRepository>();
+
         }
     }
 }

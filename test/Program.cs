@@ -9,17 +9,21 @@ namespace test
 {
     class Program
     {
-        private static readonly IDestinationRepository destinationRepository = new DestinationRepository();
+        private static readonly EmployeeRepository employeeRepository= new EmployeeRepository();
 
-
+        [Obsolete]
         static void Main(string[] args)
         {
-            var distinations = destinationRepository.GetAll();
+            DateTime ts = DateTime.Parse("2021-05-13");
+            int time = 4;
+            var emps = employeeRepository.GetEmployeeFree(ts, time);
 
-            foreach (var distination in distinations)
+            Console.WriteLine(emps);
+            foreach (var item in emps)
             {
-                Console.WriteLine(distination.Name);
+                Console.WriteLine(item.Name);
             }
+
             Console.ReadKey();
         }
     }

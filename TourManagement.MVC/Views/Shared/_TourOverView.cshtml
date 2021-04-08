@@ -1,7 +1,8 @@
 ﻿@model TourManagement.Core.DbContext.Tour
 <div class="col-md-3">
     <div class="card h-100">
-        <img src="../../Content/images/@Model.Image" class="card-img-top" alt="@Model.Name">
+        <div><img src="../../Content/images/@Model.Image" class="card-img-top" alt="@Model.Name"></div>
+        
         <div class="card-body d-flex flex-column justify-content-between">
             <h5 class="card-title">@Model.Name</h5>
             <a href="/Tours/Details/@Model.TourID" class="btn btn-primary w-50">View More</a>

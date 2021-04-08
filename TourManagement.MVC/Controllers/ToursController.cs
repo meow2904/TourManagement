@@ -24,7 +24,7 @@ namespace TourManagement.MVC.Controllers
         // GET: Tours
         public ActionResult Index(int id)
         {
-            var tours = db.Tours.Include(t => t.Destination).Include(t => t.Employee).Include(t => t.Group).Include(t => t.Hotel).Include(t => t.Transport);
+            var tours = db.Tours.Include(t => t.Destination).Include(t => t.Employee).Include(t => t.Group).Include(t => t.Hotel);
             return View(tours.ToList());
         }
 
@@ -78,7 +78,6 @@ namespace TourManagement.MVC.Controllers
             ViewBag.EmployeeID = new SelectList(db.Employees, "EmployeeID", "Name", tour.EmployeeID);
             ViewBag.GroupID = new SelectList(db.Groups, "GroupID", "Name", tour.GroupID);
             ViewBag.HotelID = new SelectList(db.Hotels, "HotelID", "Name", tour.HotelID);
-            ViewBag.TransportID = new SelectList(db.Transports, "TransportID", "Name", tour.TransportID);
             return View(tour);
         }
 
@@ -98,7 +97,6 @@ namespace TourManagement.MVC.Controllers
             ViewBag.EmployeeID = new SelectList(db.Employees, "EmployeeID", "Name", tour.EmployeeID);
             ViewBag.GroupID = new SelectList(db.Groups, "GroupID", "Name", tour.GroupID);
             ViewBag.HotelID = new SelectList(db.Hotels, "HotelID", "Name", tour.HotelID);
-            ViewBag.TransportID = new SelectList(db.Transports, "TransportID", "Name", tour.TransportID);
             return View(tour);
         }
 
@@ -119,7 +117,6 @@ namespace TourManagement.MVC.Controllers
             ViewBag.EmployeeID = new SelectList(db.Employees, "EmployeeID", "Name", tour.EmployeeID);
             ViewBag.GroupID = new SelectList(db.Groups, "GroupID", "Name", tour.GroupID);
             ViewBag.HotelID = new SelectList(db.Hotels, "HotelID", "Name", tour.HotelID);
-            ViewBag.TransportID = new SelectList(db.Transports, "TransportID", "Name", tour.TransportID);
             return View(tour);
         }
 
